@@ -11,12 +11,14 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
 
     def route(self):
         if self.path == '/python':
-            self.test()
+            self.parse_json()
         else:
             self.send_response(404)
 
-    def test(self):
-        json_msg = json.dumps({'id': 1})
+    def parse_json(self):
+        with open('test.json') as json_file:
+            json_data = json.load(json_file)
+        json_msg = json.dumps(json_data)
         self.response(200, json_msg)
 
     def response(self, status_code, body):
