@@ -2,7 +2,7 @@
 
 It is a study that tests HTTP protocol performance on the network side. The independent variables assumed to affect performance are programming languages and infrastructure environments.
 
-HTTP 프로토콜 성능을 네트워크 측면에서 테스트 하는 연구입니다. 성능에 영향을 준다고 가정한 독립변수로는 프로그래밍 언어와 인프라 환경입니다. 
+HTTP 프로토콜 성능을 네트워크 측면에서 테스트 하는 연구입니다. 성능에 영향을 준다고 가정한 독립변수로는 프로그래밍 언어와 가상화 기술입니다. 
 
 ---
 
