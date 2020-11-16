@@ -1,4 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import pymysql
 import json
 
 class HTTPRequestHandler(BaseHTTPRequestHandler):
@@ -10,8 +11,10 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
             print(e)
 
     def route(self):
-        if self.path == '/python':
+        if self.path == '/json':
             self.parse_json()
+        elif self.path == '/db':
+            self.parse_db()
         else:
             self.send_response(404)
 
@@ -20,6 +23,42 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
             json_data = json.load(json_file)
         json_msg = json.dumps(json_data)
         self.response(200, json_msg)
+    
+    def parse_db(self):
+        # connection = pymysql.connect(
+        #     host='localhost',
+        #     user='test',
+        #     passwd='123098',
+        #     db='test_db',
+        #     charset='utf8mb4',
+        #     cursorclass=pymysql.cursors.DictCursor
+        # )
+        
+        # Container connection
+        connection = pymysql.connect(
+            host='db_mysql',
+            user='root',
+            passwd='root',
+            port=3306,
+            db='container_db',
+            charset='utf8mb4',
+            cursorclass=pymysql.cursors.DictCursor
+        )
+
+        try:
+            with connection.cursor() as cursor:
+                sql = "SELECT * from Users"
+                cursor.execute(sql)
+                result = cursor.fetchone()
+                print(result) 
+                json_msg = json.dumps(result)
+                self.response(200, json_msg)
+
+        except Exception as e:
+            print(e)
+
+        finally:
+            connection.close()
 
     def response(self, status_code, body):
         self.send_response(status_code)

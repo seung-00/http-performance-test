@@ -1,19 +1,46 @@
-const mysql = require("mysql");
-const http = require("http");
-const url = require("url");
-
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "me",
-  password: "secret",
-  database: "my_db",
-});
+const mysql = require("mysql"),
+      http = require("http"),
+      url = require("url");
 
 const parseJson = (res) => {
-  res.writeHead(200, { "Content-Type": "application/json" });
+  res.writeHead(200, { 'Content-Type': 'application/json' });
   const objJson = require("./test.json");
   const testJson = JSON.stringify(objJson);
   res.end(testJson);
+};
+
+const parseDB = (res) => {
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  // const native_connection = {
+  //   host: 'localhost',
+  //   user: 'test',
+  //   password: '123098',
+  //   database: 'test_db'
+  // }
+
+  const container_connection = {
+    host: 'db_mysql',
+    user: 'root',
+    post: 3306,
+    password: 'root',
+    database: 'container_db'
+  }
+
+  let con = mysql.createConnection(container_connection);
+
+  con.connect((err) => {
+    if (err) throw err;
+    console.log("Connected!");
+  });
+  
+  con.query('SELECT * from Users', (error, rows, fields) => {
+    if (error) throw error;
+    const testJson = JSON.stringify(rows[0]);
+    console.log(testJson)
+    res.end(testJson);
+  });
+
+  con.end();
 };
 
 http
@@ -24,14 +51,11 @@ http
       if (path === "/json") {
         parseJson(res);
       } else if (path === "/db") {
+        parseDB(res);
       } else {
         res.statusCode = 404;
         res.end("no adresss");
       }
-
-      // if (path === "/db") {
-      //   res.writeHead(200, { "Content-Type": "application/json" });
-      // }
     }
   })
   .listen(8081);
