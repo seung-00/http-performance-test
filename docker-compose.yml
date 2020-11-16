@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  database:
+    container_name: db_mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: container_db
+      MYSQL_USER: container_test
+      MYSQL_PASSWORD: container_test
+    volumes:
+      - "db-volume:/var/lib/mysql"
+    ports:
+      - "3307:3306"
+
+  rest_api:
+    container_name: rest_api
+    build: .
+    ports:
+      - "8081:8081"
+      - "8082:8082"
+      - "8083:8083"
+    depends_on:
+      - database
+    stdin_open: true
+    tty: true
+
+volumes:
+  db-volume:

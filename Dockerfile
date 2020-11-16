@@ -4,10 +4,16 @@ USER root
 
 ENV DEBIAN_FRONTEND=noninteractive 
 
-RUN apt-get update
-RUN apt-get -y install golang
-RUN apt-get -y install nodejs
-RUN apt-get -y install python3
 COPY ./src/server /home
+WORKDIR /home
+
+RUN apt-get update && apt-get -y install \
+python3-pip \
+golang \
+nodejs \
+python3 \
+npm \
+&& npm install \
+&& pip3 install pymysql
 
 EXPOSE 80
