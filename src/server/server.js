@@ -1,30 +1,30 @@
 const mysql = require("mysql"),
-      http = require("http"),
-      url = require("url");
+  http = require("http"),
+  url = require("url");
 
 const parseJson = (res) => {
-  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.writeHead(200, { "Content-Type": "application/json" });
   const objJson = require("./test.json");
   const testJson = JSON.stringify(objJson);
   res.end(testJson);
 };
 
 const parseDB = (res) => {
-  res.writeHead(200, { 'Content-Type': 'application/json' });
-  // const native_connection = {
-  //   host: 'localhost',
-  //   user: 'test',
-  //   password: '123098',
-  //   database: 'test_db'
-  // }
+  res.writeHead(200, { "Content-Type": "application/json" });
+  const native_connection = {
+    host: "localhost",
+    user: "root",
+    password: "root",
+    database: "test_db",
+  };
 
-  const container_connection = {
-    host: 'db_mysql',
-    user: 'root',
-    post: 3306,
-    password: 'root',
-    database: 'container_db'
-  }
+  // const container_connection = {
+  //   host: 'db_mysql',
+  //   user: 'root',
+  //   post: 3306,
+  //   password: 'root',
+  //   database: 'container_db'
+  // }
 
   let con = mysql.createConnection(container_connection);
 
@@ -32,11 +32,11 @@ const parseDB = (res) => {
     if (err) throw err;
     console.log("Connected!");
   });
-  
-  con.query('SELECT * from Users', (error, rows, fields) => {
+
+  con.query("SELECT * from Users", (error, rows, fields) => {
     if (error) throw error;
     const testJson = JSON.stringify(rows[0]);
-    console.log(testJson)
+    console.log(testJson);
     res.end(testJson);
   });
 
