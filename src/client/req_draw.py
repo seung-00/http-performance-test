@@ -3,7 +3,8 @@ import requests
 import matplotlib.pyplot as plt
 
 def test(URL, req_num):
-    try:        
+    try:
+        print(f"{req_num} requst...")
         end_time = time.time()+1
         req_cnt = 0
         
@@ -34,8 +35,10 @@ def draw_tps(max_req_num, tps_list):
     plt.show()
 
 if __name__ == "__main__":
-    URLS = {1: "http://localhost:8081/node", 2: "http://localhost:8082/python", 3: "http://localhost:8083/go"}
-
+    ip = input("type the server ip\n")
+    rsc = input("type what you want to get => json or db\n")
+    URLS = {1: f"http://{ip}:8081/{rsc}", 2: f"http://{ip}:8082/{rsc}", 3: f"http://{ip}:8083/{rsc}"}
+    print(URLS)
     lang_key = int(input("1: node 2:python 3: go \n"))
     max_req_num = int(input("put max request\n"))
 
