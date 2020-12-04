@@ -8,12 +8,13 @@ COPY ./src/server /home
 WORKDIR /home
 
 RUN apt-get update && apt-get -y install \
-python3-pip \
-golang \
-nodejs \
-python3 \
-npm \
-&& npm install \
-&& pip3 install pymysql
+  vim \
+  python3-pip \
+  golang \
+  nodejs \
+  python3 \
+  npm \
+  && npm install \
+  && pip3 install pymysql
 
 EXPOSE 80
