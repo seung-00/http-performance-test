@@ -68,15 +68,15 @@ const run = (env) => {
   console.log('node server is running...');
   let connConfig;
   switch (env) {
-    case 1:
+    case '1':
       connConfig = connectionHash['nativeConnection'];
       break;
 
-    case 2:
+    case '2':
       connConfig = connectionHash['vmConnection'];
       break;
 
-    case 3:
+    case '3':
       connConfig = connectionHash['containerConnection'];
       break;
   }
