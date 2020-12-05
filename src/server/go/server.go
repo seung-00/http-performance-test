@@ -45,14 +45,16 @@ func handleDB(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
     log.Fatal(err)
 	}
+	defer db.Close()
 
 	var name string
 	var value int
 	err = db.QueryRow("SELECT * from Users").Scan(&value, &name)
-
+	
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	data := make(map[string]interface{})
 	data[name] = value
 	jsonData, err := json.Marshal(data)	
