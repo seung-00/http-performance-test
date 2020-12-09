@@ -38,13 +38,12 @@ const parseDB = (connConfig, res) => {
 
   con.connect((err) => {
     if (err) throw err;
-    console.log('Connected!');
   });
 
   con.query('SELECT * from Users', (error, rows, fields) => {
     if (error) throw error;
     const testJson = JSON.stringify(rows[0]);
-    console.log(testJson);
+    // console.log(testJson);
     res.end(testJson);
   });
 

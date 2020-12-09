@@ -65,7 +65,7 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
                 sql = "SELECT * from Users"
                 cursor.execute(sql)
                 result = cursor.fetchone()
-                print(result)
+                # print(result)
                 json_msg = json.dumps(result)
                 self.response(200, json_msg)
 
