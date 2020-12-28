@@ -1,0 +1,2 @@
+#!/bin/bash
+top -b -n 100 -d 3 |awk '/top -/ {printf $3","} /%Cpu/ {printf 100-$8","} /MiB Mem/ {printf $8/$4"\n"}' > log.txt
