@@ -4,12 +4,12 @@
 
 현재 서버 개발에 다양한 언어들이 쓰이고 있다. 또한 MSA(Micro Service Architectural)와 컨테이너 기술의 확산으로 서버 구축에 있어서도 선택지가 늘었다. 본 과제는 서버 개발에 사용되는 언어들과 인프라 환경별 성능 평가를 실시하여 서버 구축에 도움될 정량적인 정보를 제공하도록 한다.
 <br/>
+<br/>
 ## Stacks
 
 - Node.js, Python, Go
 
 - Linux, Docker, vmware
-<br/>
 
 ## Methods
 
@@ -28,7 +28,6 @@
    2. 클라이언트의 GET 메서드에 서버는 MySQL Query 를 실행해 결과를 response 로 전달한다.
 
 4. 평가된 데이터들을 시각화한다.
-<br/>
 
 ## Results
 
@@ -60,7 +59,6 @@
    - **Memory usage**
 
      <img width="720" alt="스크린샷 2020-12-28 오후 10 58 07" src="https://user-images.githubusercontent.com/46865281/103231979-9afd5c80-497c-11eb-97d7-3d14c102205c.png">
-<br/>
 
 ## Conclusion
 
